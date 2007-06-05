@@ -1,6 +1,6 @@
 %define	name	ypserv
 %define	version	2.19
-%define	release	%mkrel 2
+%define	release	%mkrel 3
 
 Summary:	The NIS (Network Information Service) server
 Url:		http://www.linux-nis.org/
@@ -24,7 +24,7 @@ Patch11:	ypserv-2.13-ypxfr-zeroresp.patch
 
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	mawk libgdbm-devel libopenslp-devel
-Requires:	portmap mawk make
+Requires:	portmapper mawk make
 Requires(post):	rpm-helper
 Requires(preun):	rpm-helper
 
