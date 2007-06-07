@@ -1,6 +1,6 @@
 %define	name	ypserv
 %define	version	2.19
-%define	release	%mkrel 3
+%define	release	%mkrel 4
 
 Summary:	The NIS (Network Information Service) server
 Url:		http://www.linux-nis.org/
