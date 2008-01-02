@@ -22,6 +22,7 @@ Patch6:		ypserv-2.5-nfsnobody2.patch
 Patch10:	ypserv-2.13-yplib-memleak.patch
 Patch11:	ypserv-2.13-ypxfr-zeroresp.patch
 
+Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	mawk libgdbm-devel libopenslp-devel
 Requires:	portmapper mawk make
 Requires(post):	rpm-helper
