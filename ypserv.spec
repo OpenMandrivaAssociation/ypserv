@@ -24,7 +24,7 @@ Patch11:	ypserv-2.13-ypxfr-zeroresp.patch
 
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	mawk libgdbm-devel libopenslp-devel
-Requires:	portmapper mawk make
+Requires:	rpcbind mawk make
 Requires(post):	rpm-helper
 Requires(preun):	rpm-helper
 
