@@ -1,6 +1,6 @@
 %define	name	ypserv
-%define	version	2.19
-%define	release	%mkrel 8
+%define	version	2.22
+%define	release	%mkrel 1
 
 Summary:	The NIS (Network Information Service) server
 Url:		http://www.linux-nis.org/
@@ -17,9 +17,7 @@ Source3:	ypserv-ypxfrd.init
 Source4:	ftp://ftp.kernel.org/pub/linux/utils/net/NIS/%{name}-%{version}.tar.bz2.sign
 Patch0:		ypserv-2.10-makefile.patch
 Patch2: 	ypserv-2.11-path.patch
-Patch3:		ypserv-2.10-nomap.patch
 Patch6:		ypserv-2.5-nfsnobody2.patch
-Patch10:	ypserv-2.13-yplib-memleak.patch
 Patch11:	ypserv-2.13-ypxfr-zeroresp.patch
 
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -46,11 +44,8 @@ machines.
 %prep
 %setup -q
 %patch0 -p1 -b .makefix
-#%patch1 -p1 -b .syslog
-%patch2 -p1 -b .path
-%patch3 -p1 -b .nomap
+%patch2 -p0 -b .path
 %patch6 -p1
-%patch10 -p1
 %patch11 -p1
 
 %build
