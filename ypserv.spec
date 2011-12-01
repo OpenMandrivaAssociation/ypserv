@@ -59,8 +59,8 @@ cp etc/README etc/README.etc
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
-%makeinstall libexecdir=$RPM_BUILD_ROOT%{_libdir}/yp
+rm -rf %{buildroot}
+%makeinstall libexecdir=%{buildroot}%{_libdir}/yp
 
 install -m644 etc/ypserv.conf -D %buildroot%{_sysconfdir}/ypserv.conf
 install -m755 %{SOURCE1} -D %buildroot%{_initrddir}/ypserv
@@ -70,7 +70,7 @@ install -m755 %{SOURCE3} -D %buildroot%{_initrddir}/ypxfrd
 perl -pi -e "s|/etc/rc.d/init.d|%{_initrddir}|" %buildroot%{_initrddir}/*
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %post
 %_post_service ypserv
