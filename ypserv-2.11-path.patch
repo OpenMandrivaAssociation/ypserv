@@ -1,0 +1,13 @@
+Index: scripts/Makefile.in
+===================================================================
+--- scripts/Makefile.in
++++ scripts/Makefile.in	2010-02-07 14:19:17.000000000 +0100
+@@ -191,7 +191,7 @@
+ #
+ CLEANFILES = *~ ${SCRIPTS}
+ EXTRA_DIST = ${MANS} ${XMLS}
+-varypdir = /var/yp
++varypdir = $(prefix)/../var/yp
+ man_MANS = pwupdate.8 ypinit.8
+ XMLS = pwupdate.8.xml ypinit.8.xml
+ libexec_SCRIPTS = ypxfr_1perhour ypxfr_1perday ypxfr_2perday \

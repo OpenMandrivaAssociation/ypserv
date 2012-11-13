@@ -1,0 +1,10 @@
+--- ypserv-2.13/ypxfr/ypxfr.c.orig	2004-01-12 08:12:15.000000000 -0500
++++ ypserv-2.13/ypxfr/ypxfr.c	2004-08-31 13:17:30.000000000 -0400
+@@ -361,6 +361,7 @@ ypxfr (char *map, char *source_host, cha
+   struct hostent *h;
+   int sock, result;
+ 
++  memset(&resp_val, '\0', sizeof(resp_val));
+   /* Name of the map file */
+   if (strlen (path_ypdb) + strlen (target_domain) + strlen (map) + 3 < MAXPATHLEN)
+     sprintf (dbName_orig, "%s/%s/%s", path_ypdb, target_domain, map);
