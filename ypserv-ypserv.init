@@ -1,0 +1,91 @@
+#!/bin/sh
+#
+# ypserv:       Starts the yp-server
+#
+# Version:      @(#) /etc/init.d/ypserv.init 1.0
+#
+# Author:       Joerg Mertin <smurphy@stargate.bln.sub.org>
+#
+# chkconfig: 2345 16 84
+# description: ypserv is an implementation of the standard NIS/YP networking \
+#              protocol. It allows network-wide distribution of hostname, \
+#              username, and other information databases. This is the NIS \
+#              server, and is not needed on NIS clients.
+# processname: ypserv
+#
+# config: /etc/ypserv.conf
+#
+### BEGIN INIT INFO
+# Provides: ypserv
+# Required-Start: $remote_fs $portmap
+# Required-Stop: $remote_fs $portmap
+# Should-Start: slpd
+# Should-Stop: slpd
+# Default-Start: 2 3 4 5
+# Short-Description: The ypserver daemon (for a NIS/YP server)
+# Description: ypserv is an implementation of the standard NIS/YP networking
+#              protocol. It allows network-wide distribution of hostname,
+#              username, and other information databases. This is the NIS
+#              server, and is not needed on NIS clients.
+### END INIT INFO
+
+# Source function library.
+if [ -f /etc/init.d/functions ] ; then
+	. /etc/init.d/functions
+elif [ -f /etc/rc.d/init.d/functions ] ; then
+	. /etc/rc.d/init.d/functions
+else
+	exit 0
+fi
+
+# getting the YP-Domainname
+. /etc/sysconfig/network
+
+RETVAL=0
+
+start() {
+	echo -n "Starting YP server services: "
+        daemon ypserv
+        RETVAL=$?
+        echo
+	[ $RETVAL -eq 0 ] && touch /var/lock/subsys/ypserv
+	return $RETVAL
+}
+
+stop() {
+        echo -n "Stopping YP server services: "
+        killproc ypserv
+        RETVAL=$?
+        [ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/ypserv
+        echo
+	return $RETVAL
+}
+
+# See how we were called.
+case "$1" in
+  start)
+	start
+	;;
+  stop)
+	stop
+	;;
+  status)
+	status ypserv
+	;;
+  restart|reload)
+	stop
+	start
+	;;
+  condrestart)
+	if [ -f /var/lock/subsys/ypserv ]; then
+	    stop
+	    start
+	fi
+	;;
+  *)
+	echo "Usage: $0 {start|stop|status|reload|restart|condrestart}"
+	exit 1
+esac
+
+exit $RETVAL
+

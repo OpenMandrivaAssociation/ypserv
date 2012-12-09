@@ -1,6 +1,2 @@
 sources:
-  "ypserv-2.22.tar.bz2:"	22d5cd55b5c77865fff727c9da574b0649969c66
-  "ypserv-2.22.tar.bz2.sign:"	8c6dc63a9e33dba5bcb8297e9aefc25ad7d0ed9a
-  "ypserv-yppasswdd.init:"	009cb0f89d6bb3645c61b3d1691c54b7c473aaf4
-  "ypserv-ypserv.init:"	fda061034e1981354d69e7078f8096c9b40980cf
-  "ypserv-ypxfrd.init:"	76e86db49d44d371a1748b743f6406531998cea3
+  "ypserv-2.22.tar.bz2": 22d5cd55b5c77865fff727c9da574b0649969c66

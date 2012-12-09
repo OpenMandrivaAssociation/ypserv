@@ -1,6 +1,6 @@
 %define	name	ypserv
 %define	version	2.22
-%define	release	%mkrel 3
+%define	release	%mkrel 5
 
 Summary:	The NIS (Network Information Service) server
 Url:		http://www.linux-nis.org/
@@ -59,8 +59,8 @@ cp etc/README etc/README.etc
 %make
 
 %install
-rm -rf %{buildroot}
-%makeinstall libexecdir=%{buildroot}%{_libdir}/yp
+rm -rf $RPM_BUILD_ROOT
+%makeinstall libexecdir=$RPM_BUILD_ROOT%{_libdir}/yp
 
 install -m644 etc/ypserv.conf -D %buildroot%{_sysconfdir}/ypserv.conf
 install -m755 %{SOURCE1} -D %buildroot%{_initrddir}/ypserv
@@ -70,7 +70,7 @@ install -m755 %{SOURCE3} -D %buildroot%{_initrddir}/ypxfrd
 perl -pi -e "s|/etc/rc.d/init.d|%{_initrddir}|" %buildroot%{_initrddir}/*
 
 %clean
-rm -rf %{buildroot}
+rm -rf $RPM_BUILD_ROOT
 
 %post
 %_post_service ypserv
@@ -95,4 +95,88 @@ rm -rf %{buildroot}
 %{_mandir}/*/*
 %{_includedir}/*/*
 
+
+
+
+%changelog
+* Sat May 07 2011 Oden Eriksson <oeriksson@mandriva.com> 2.22-3mdv2011.0
++ Revision: 671949
+- mass rebuild
+
+* Sat Dec 04 2010 Oden Eriksson <oeriksson@mandriva.com> 2.22-2mdv2011.0
++ Revision: 608274
+- rebuild
+
+* Mon Feb 08 2010 Olivier Thauvin <nanardon@mandriva.org> 2.22-1mdv2010.1
++ Revision: 501893
+- 2.22
+- 2.22
+
+* Sat May 09 2009 Olivier Thauvin <nanardon@mandriva.org> 2.19-8mdv2010.0
++ Revision: 373789
+- s/portmapper/rpcbind
+- s/portmapper/rpcbind
+
+* Tue Dec 23 2008 Oden Eriksson <oeriksson@mandriva.com> 2.19-7mdv2009.1
++ Revision: 317954
+- rediffed some fuzzy patches
+
+* Tue Mar 04 2008 Oden Eriksson <oeriksson@mandriva.com> 2.19-6mdv2008.1
++ Revision: 178769
+- rebuild
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+
+* Fri Jun 22 2007 Andreas Hasenack <andreas@mandriva.com> 2.19-5mdv2008.0
++ Revision: 43311
+- rebuild with new serverbuild macro (-fstack-protector)
+
+* Thu Jun 07 2007 Anssi Hannula <anssi@mandriva.org> 2.19-4mdv2008.0
++ Revision: 36220
+- rebuild with correct optflags
+
+  + Olivier Thauvin <nanardon@mandriva.org>
+    - requires portmapper instead portmap
+
+
+* Fri Jul 21 2006 Olivier Thauvin <nanardon@mandriva.org>
++ 07/21/06 10:43:13 (41827)
+- rebuild
+
+* Fri Jul 21 2006 Olivier Thauvin <nanardon@mandriva.org>
++ 07/21/06 10:38:51 (41822)
+Import ypserv
+
+* Sat Feb 11 2006 Olivier Thauvin <nanardon@mandriva.org> 2.19-1mdk
+- 2.19
+
+* Sun Jan 08 2006 Olivier Blin <oblin@mandriva.com> 2.17-3mdk
+- add LSB comments in initscripts (Sources 1, 2, 3)
+- fix requires post/preun
+- use 755 perms for executables
+
+* Sat Dec 31 2005 Mandriva Linux Team <http://www.mandrivaexpert.com/> 2.17-2mdk
+- Rebuild
+
+* Sat Jul 16 2005 Olivier Thauvin <nanardon@mandriva.org> 2.17-1mdk
+- 2.17
+- remove patch{8,9}, no need anymore
+
+* Tue Mar 22 2005 Gwenole Beauchesne <gbeauchesne@mandrakesoft.com> 2.14-2mdk
+- fix build with -fPIE
+
+* Wed Nov 17 2004 Per Øyvind Karlsen <peroyvind@linux-mandrake.com> 2.14-1mdk
+- 2.14
+- sync with fedora patches
+- cosmetics
+
+* Mon Jan 19 2004 Frederic Lepied <flepied@mandrakesoft.com> 2.11-1mdk
+- 2.11: SLP support
+
+* Wed Nov 05 2003 Frederic Lepied <flepied@mandrakesoft.com> 2.10-1mdk
+- 2.10
 

@@ -1,0 +1,75 @@
+#!/bin/bash
+#
+# ypxfrd:       Starts the ypxfrd daemon
+#
+# Version:      @(#) /etc/init.d/ypxfrd 1.0
+#
+# chkconfig: 2345 26 74
+# description: ypxfrd should be started in addition to ypserv to accelerate \
+#	       transferring yp maps.
+# processname: ypxfrd
+#
+### BEGIN INIT INFO
+# Provides: ypxfrd
+# Required-Start: $portmap ypserv
+# Required-Stop: $portmap
+# Default-Start: 2 3 4 5
+# Short-Description: The ypxfrd daemon (for a NIS/YP server)
+# Description: ypxfrd should be started in addition to ypserv to accelerate
+#              transferring yp maps.
+### END INIT INFO
+
+# Source function library.
+[ -f /etc/rc.d/init.d/functions ] || exit 0
+. /etc/rc.d/init.d/functions
+
+# getting the YP-Domainname
+. /etc/sysconfig/network
+
+RETVAL=0
+
+start() {
+	echo -n $"Starting YP map server: "
+        daemon rpc.ypxfrd $YPXFRD_ARGS
+        RETVAL=$?
+        echo
+        [ $RETVAL -eq 0 ] && touch /var/lock/subsys/ypxfrd
+	return $RETVAL
+}
+
+stop() {
+        echo -n $"Stopping YP map server: "
+        killproc rpc.ypxfrd
+        RETVAL=$?
+        [ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/ypxfrd
+        echo
+	return $RETVAL
+}
+
+# See how we were called.
+case "$1" in
+  start)
+	start
+	;;
+  stop)
+	stop
+	;;
+  status)
+	status rpc.ypxfrd
+	;;
+  restart|reload)
+	stop
+	start
+	;;
+  condrestart)
+	if [ -f /var/lock/subsys/ypxfrd ]; then
+	    stop
+	    start
+	fi
+	;;
+  *)
+	echo $"Usage: $0 {start|stop|status|restart|reload|condrestart}"
+	exit 1
+esac
+
+exit $RETVAL
