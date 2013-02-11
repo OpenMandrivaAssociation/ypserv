@@ -1,0 +1,11 @@
+--- ypserv-2.29/configure.in.bero	2013-02-11 15:42:29.565515227 +0100
++++ ypserv-2.29/configure.in	2013-02-11 15:42:38.210415794 +0100
+@@ -5,7 +5,7 @@ dnl Process this file with autoconf to p
+ AC_INIT(ypserv, 2.29, kukuk@linux-nis.org)
+ AM_INIT_AUTOMAKE
+ AC_CONFIG_SRCDIR([ypserv/ypserv.c])
+-AM_CONFIG_HEADER(config.h)
++AC_CONFIG_HEADERS([config.h])
+ AC_PREFIX_DEFAULT(/usr)
+ AH_BOTTOM([#include <conf_post.h>])
+ 

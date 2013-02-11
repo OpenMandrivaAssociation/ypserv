@@ -1,0 +1,107 @@
+--- ypserv-2.29/ypserv/Makefile.am.bero	2013-02-11 15:38:58.491945168 +0100
++++ ypserv-2.29/ypserv/Makefile.am	2013-02-11 15:39:57.842260815 +0100
+@@ -22,7 +22,8 @@ sbin_PROGRAMS = ypserv
+ 
+ ypserv_SOURCES = ypserv.c server.c ypserv_xdr.c reg_slp.c
+ 
+-ypserv_LDADD =  @PIE_LDFLAGS@ $(top_builddir)/lib/libyp.a @LIBDBM@ @LIBSLP@
++ypserv_LDADD =  @PIE_LDFLAGS@ $(top_builddir)/lib/libyp.a @LIBDBM@ @LIBSLP@ -ltirpc
++
+ ypserv_CFLAGS = @PIE_CFLAGS@
+ 
+ if ENABLE_REGENERATE_MAN
+--- ypserv-2.29/ypxfr/Makefile.am.bero	2013-02-11 16:44:23.777957826 +0100
++++ ypserv-2.29/ypxfr/Makefile.am	2013-02-11 16:44:30.437881092 +0100
+@@ -22,7 +22,7 @@ libexec_PROGRAMS = ypxfr
+ 
+ ypxfr_SOURCES = ypxfr.c ypxfr_clnt.c ypxfr_xdr.c
+ 
+-ypxfr_LDADD = @LIBDBM@ $(top_builddir)/lib/libyp.a
++ypxfr_LDADD = @LIBDBM@ $(top_builddir)/lib/libyp.a -ltirpc
+ 
+ if ENABLE_REGENERATE_MAN
+ %.8: %.8.xml
+--- ypserv-2.29/makedbm/Makefile.am.bero	2013-02-11 16:53:22.200753182 +0100
++++ ypserv-2.29/makedbm/Makefile.am	2013-02-11 16:53:26.621701587 +0100
+@@ -21,7 +21,7 @@ libexec_PROGRAMS = makedbm
+ 
+ makedbm_SOURCES = makedbm.c
+ 
+-makedbm_LDADD =  @LIBDBM@  $(top_builddir)/lib/libyp.a
++makedbm_LDADD =  @LIBDBM@  $(top_builddir)/lib/libyp.a -ltirpc
+ 
+ if ENABLE_REGENERATE_MAN
+ %.8: %.8.xml
+--- ypserv-2.29/rpc.yppasswdd/Makefile.am.bero	2013-02-11 16:53:47.096463996 +0100
++++ ypserv-2.29/rpc.yppasswdd/Makefile.am	2013-02-11 16:53:51.285415816 +0100
+@@ -24,7 +24,7 @@ sbin_PROGRAMS = rpc.yppasswdd
+ 
+ rpc_yppasswdd_SOURCES = update.c yppasswd_xdr.c yppasswdd.c
+ 
+-rpc_yppasswdd_LDADD =  @PIE_LDFLAGS@ $(LIBDBM) $(LIBCRYPT) $(top_builddir)/lib/libyp.a
++rpc_yppasswdd_LDADD =  @PIE_LDFLAGS@ $(LIBDBM) $(LIBCRYPT) $(top_builddir)/lib/libyp.a -ltirpc
+ rpc_yppasswdd_CFLAGS = @PIE_CFLAGS@
+ 
+ if ENABLE_REGENERATE_MAN
+--- ypserv-2.29/rpc.ypxfrd/Makefile.am.bero	2013-02-11 16:53:34.384612301 +0100
++++ ypserv-2.29/rpc.ypxfrd/Makefile.am	2013-02-11 16:53:39.317555549 +0100
+@@ -22,7 +22,7 @@ sbin_PROGRAMS = rpc.ypxfrd
+ 
+ rpc_ypxfrd_SOURCES = ypxfrd.c ypxfrd_server.c ypxfrd_svc.c
+ 
+-rpc_ypxfrd_LDADD = @PIE_LDFLAGS@ $(top_builddir)/lib/libyp.a @LIBDBM@
++rpc_ypxfrd_LDADD = @PIE_LDFLAGS@ $(top_builddir)/lib/libyp.a @LIBDBM@ -ltirpc
+ rpc_ypxfrd_CFLAGS = @PIE_CFLAGS@
+ 
+ if ENABLE_REGENERATE_MAN
+--- ypserv-2.29/yphelper/Makefile.am.bero	2013-02-11 16:53:56.600354686 +0100
++++ ypserv-2.29/yphelper/Makefile.am	2013-02-11 16:54:00.693307610 +0100
+@@ -22,7 +22,7 @@ libexec_PROGRAMS = yphelper
+ 
+ yphelper_SOURCES = yphelper.c
+ 
+-yphelper_LDADD = $(top_builddir)/lib/libyp.a @LIBDBM@
++yphelper_LDADD = $(top_builddir)/lib/libyp.a @LIBDBM@ -ltirpc
+ 
+ if ENABLE_REGENERATE_MAN
+ %.8: %.8.xml
+--- ypserv-2.29/yppush/Makefile.am.bero	2013-02-11 16:53:08.903906153 +0100
++++ ypserv-2.29/yppush/Makefile.am	2013-02-11 16:53:13.757850291 +0100
+@@ -21,7 +21,7 @@ sbin_PROGRAMS = yppush
+ 
+ yppush_SOURCES = yppush.c
+ 
+-yppush_LDADD =  @PIE_LDFLAGS@ @LIBDBM@  $(top_builddir)/lib/libyp.a
++yppush_LDADD =  @PIE_LDFLAGS@ @LIBDBM@  $(top_builddir)/lib/libyp.a -ltirpc
+ yppush_CFLAGS = @PIE_CFLAGS@
+ 
+ if ENABLE_REGENERATE_MAN
+--- ypserv-2.29/yppush/yppush.c.bero	2013-02-11 16:51:14.905217506 +0100
++++ ypserv-2.29/yppush/yppush.c	2013-02-11 16:52:56.150052885 +0100
+@@ -149,7 +149,7 @@ yppushproc_xfrresp_1_svc (yppushresp_xfr
+   if (verbose_flag > 1)
+     log_msg ("yppushproc_xfrresp_1_svc");
+ 
+-  sin = svc_getcaller (rqstp->rq_xprt);
++  sin = (struct sockaddr_in*)svc_getcaller (rqstp->rq_xprt);
+ 
+   hp = gethostbyaddr ((char *) &sin->sin_addr.s_addr,
+ 		      sizeof (sin->sin_addr.s_addr), AF_INET);
+@@ -200,7 +200,7 @@ yppush_xfrrespprog_1(struct svc_req *rqs
+   memset ((char *)&argument, 0, sizeof (argument));
+   if (!svc_getargs (transp, _xdr_argument, (caddr_t) &argument))
+     {
+-      const struct sockaddr_in *sin = svc_getcaller (rqstp->rq_xprt);
++      const struct sockaddr_in *sin = (const struct sockaddr_in *)svc_getcaller (rqstp->rq_xprt);
+ 
+       log_msg ("cannot decode arguments for %d from %s",
+               rqstp->rq_proc, inet_ntoa (sin->sin_addr));
+@@ -519,7 +519,7 @@ yppush_foreach (const char *host)
+       yppush_svc_run (server);
+       exit (0);
+     default:
+-      close (CallbackXprt->xp_sock);
++      close (CallbackXprt->xp_fd);
+       req.map_parms.domain = (char *) DomainName;
+       req.map_parms.map = (char *) current_map;
+       /* local_hostname is correct since we have compared it

@@ -1,30 +1,33 @@
-%define	name	ypserv
-%define	version	2.22
-%define	release	%mkrel 5
-
 Summary:	The NIS (Network Information Service) server
 Url:		http://www.linux-nis.org/
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:		ypserv
+Version:	2.29
+Release:	1
 License:	GPL
 Group:		System/Servers
 
-Source0:	ftp://ftp.kernel.org/pub/linux/utils/net/NIS/%{name}-%{version}.tar.bz2
+Source0:	http://www.linux-nis.org/download/ypserv/%{name}-%{version}.tar.bz2
 Source1:	ypserv-ypserv.init
 Source2:	ypserv-yppasswdd.init
 Source3:	ypserv-ypxfrd.init
-Source4:	ftp://ftp.kernel.org/pub/linux/utils/net/NIS/%{name}-%{version}.tar.bz2.sign
 Patch0:		ypserv-2.10-makefile.patch
+Patch1:		ypserv-2.29-tirpc.patch
 Patch2: 	ypserv-2.11-path.patch
+Patch3:		ypserv-2.29-automake-1.13.patch
 Patch6:		ypserv-2.5-nfsnobody2.patch
 Patch11:	ypserv-2.13-ypxfr-zeroresp.patch
 
-Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	mawk libgdbm-devel libopenslp-devel
 Requires:	rpcbind mawk make
 Requires(post):	rpm-helper
 Requires(preun):	rpm-helper
+
+%track
+prog %name = {
+	url = http://www.linux-nis.org/download/ypserv/
+	version = %version
+	regex = %name-(__VER__)\.tar\.bz2
+}
 
 %description
 The Network Information Service (NIS) is a system which provides network
@@ -44,9 +47,15 @@ machines.
 %prep
 %setup -q
 %patch0 -p1 -b .makefix
+%patch1 -p1 -b .tirpc~
 %patch2 -p0 -b .path
+%patch3 -p1 -b .am13~
 %patch6 -p1
 %patch11 -p1
+
+aclocal -I m4
+automake
+autoconf
 
 %build
 %serverbuild
