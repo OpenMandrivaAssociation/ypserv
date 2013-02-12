@@ -69,7 +69,7 @@ cp etc/README etc/README.etc
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%makeinstall libexecdir=$RPM_BUILD_ROOT%{_libdir}/yp
+%makeinstall_std
 
 install -m644 etc/ypserv.conf -D %buildroot%{_sysconfdir}/ypserv.conf
 install -m755 %{SOURCE1} -D %buildroot%{_initrddir}/ypserv
