@@ -17,6 +17,8 @@ Patch3:		ypserv-2.29-automake-1.13.patch
 Patch6:		ypserv-2.5-nfsnobody2.patch
 Patch11:	ypserv-2.13-ypxfr-zeroresp.patch
 
+BuildRequires:	pkgconfig(libtirpc)
+
 BuildRequires:	mawk libgdbm-devel libopenslp-devel
 Requires:	rpcbind mawk make
 Requires(post):	rpm-helper
