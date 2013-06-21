@@ -1,7 +1,7 @@
 Index: scripts/Makefile.in
 ===================================================================
---- scripts/Makefile.in
-+++ scripts/Makefile.in	2010-02-07 14:19:17.000000000 +0100
+--- ./scripts/Makefile.in
++++ ./scripts/Makefile.in	2010-02-07 14:19:17.000000000 +0100
 @@ -191,7 +191,7 @@
  #
  CLEANFILES = *~ ${SCRIPTS}
