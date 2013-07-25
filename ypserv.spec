@@ -1,7 +1,9 @@
+%define __noautoreq '.*/bin/awk|.*/bin/gawk'
+
 Summary:	The NIS (Network Information Service) server
 Name:		ypserv
 Version:	2.29
-Release:	2
+Release:	3
 License:	GPLv2
 Group:		System/Servers
 Url:		http://www.linux-nis.org/
