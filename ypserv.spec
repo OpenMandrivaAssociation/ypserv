@@ -46,7 +46,7 @@ machines.
 %doc etc/ypserv.conf etc/securenets etc/README.etc
 %config(noreplace) %{_sysconfdir}/ypserv.conf
 %config(noreplace) /var/yp/*
-%{_unitrddir}/*
+%{_unitdir}/*
 %dir %{_libdir}/yp
 %attr(755, root, root) %{_libdir}/yp/*
 %attr(755, root, root) %{_sbindir}/*
@@ -86,6 +86,6 @@ cp etc/README etc/README.etc
 
 install -m644 etc/ypserv.conf -D %{buildroot}%{_sysconfdir}/ypserv.conf
 mkdir -p %{buildroot}%{_unitdir}
-install -m755 %{SOURCE1} -D %{buildroot}%{_unitrddir}/ypserv
-install -m755 %{SOURCE2} -D %{buildroot}%{_unitrddir}/yppasswdd
-install -m755 %{SOURCE3} -D %{buildroot}%{_unitrddir}/ypxfrd
+install -m755 %{SOURCE1} -D %{buildroot}%{_unitdir}/ypserv
+install -m755 %{SOURCE2} -D %{buildroot}%{_unitdir}/yppasswdd
+install -m755 %{SOURCE3} -D %{buildroot}%{_unitdir}/ypxfrd
