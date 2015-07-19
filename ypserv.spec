@@ -3,7 +3,7 @@
 Summary:	The NIS (Network Information Service) server
 Name:		ypserv
 Version:	2.29
-Release:	11
+Release:	12
 License:	GPLv2+
 Group:		System/Servers
 Url:		http://www.linux-nis.org/
