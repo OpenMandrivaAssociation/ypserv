@@ -12,7 +12,7 @@ Source1:	ypserv.service
 Source2:	yppasswdd.service
 Source3:	ypxfrd.service
 Patch0:		ypserv-2.10-makefile.patch
-Patch1:		ypserv-2.29-tirpc.patch
+#Patch1:		ypserv-2.29-tirpc.patch
 Patch2:		ypserv-2.11-path.patch
 Patch3:		ypserv-2.29-automake-1.13.patch
 Patch6:		ypserv-2.5-nfsnobody2.patch
