@@ -2,8 +2,8 @@
 
 Summary:	The NIS (Network Information Service) server
 Name:		ypserv
-Version:	2.29
-Release:	13
+Version:	2.32
+Release:	1
 License:	GPLv2+
 Group:		System/Servers
 Url:		http://www.linux-nis.org/
@@ -79,10 +79,10 @@ cp etc/README etc/README.etc
 	--enable-yppasswd \
 	--libexecdir=%{_libdir}/yp \
 	--mandir=%{_mandir}
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 install -m644 etc/ypserv.conf -D %{buildroot}%{_sysconfdir}/ypserv.conf
 mkdir -p %{buildroot}%{_unitdir}
