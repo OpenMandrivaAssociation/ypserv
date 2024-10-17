@@ -6,7 +6,7 @@ Version:	2.32
 Release:	1
 License:	GPLv2+
 Group:		System/Servers
-Url:		http://www.linux-nis.org/
+Url:		https://www.linux-nis.org/
 Source0:	http://www.linux-nis.org/download/ypserv/%{name}-%{version}.tar.gz
 Source1:	ypserv.service
 Source2:	yppasswdd.service
