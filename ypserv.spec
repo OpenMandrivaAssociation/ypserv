@@ -17,6 +17,11 @@ Patch2:		ypserv-2.11-path.patch
 Patch3:		ypserv-2.29-automake-1.13.patch
 Patch6:		ypserv-2.5-nfsnobody2.patch
 Patch11:	ypserv-2.13-ypxfr-zeroresp.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	mawk
 BuildRequires:	gdbm-devel
 BuildRequires:	openslp-devel
